@@ -1,4 +1,4 @@
-package com.nanchen.rxjava2examples.module.rxjava2.Thread;
+package com.nanchen.rxjava2examples.module.rxjava2.thread;
 
 import android.util.Log;
 

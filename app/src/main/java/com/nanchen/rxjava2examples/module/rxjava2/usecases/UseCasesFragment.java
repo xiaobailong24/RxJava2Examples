@@ -4,7 +4,7 @@ import android.content.Intent;
 
 import com.nanchen.rxjava2examples.model.OperatorModel;
 import com.nanchen.rxjava2examples.module.rxjava2.CategoryBaseFragment;
-import com.nanchen.rxjava2examples.module.rxjava2.Thread.RxThreadActivity;
+import com.nanchen.rxjava2examples.module.rxjava2.thread.RxThreadActivity;
 import com.nanchen.rxjava2examples.module.rxjava2.usecases.concat.RxCaseConcatActivity;
 import com.nanchen.rxjava2examples.module.rxjava2.usecases.debounce.RxCaseDebounceActivity;
 import com.nanchen.rxjava2examples.module.rxjava2.usecases.fastNetwork.RxNetworkActivity;

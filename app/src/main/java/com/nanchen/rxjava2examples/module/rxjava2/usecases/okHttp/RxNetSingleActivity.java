@@ -22,15 +22,14 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 /**
- *
  * 采用 OkHttp3 配合 map , doOnNext , 线程切换做简单的网络请求
- *
+ * <p>
  * 1、通过 Observable.create() 方法，调用 OkHttp 网络请求;
  * 2、通过 map 操作符结合 Gson , 将 Response 转换为 bean 类;
  * 3、通过 doOnNext() 方法，解析 bean 中的数据，并进行数据库存储等操作;
  * 4、调度线程，在子线程进行耗时操作任务，在主线程更新 UI;
  * 5、通过 subscribe(),根据请求成功或者失败来更新 UI。
- *
+ * <p>
  * Author: nanchen
  * Email: liushilin520@foxmail.com
  * Date: 2017-06-30  14:24
@@ -49,6 +48,7 @@ public class RxNetSingleActivity extends RxOperatorBaseActivity {
         Observable.create(new ObservableOnSubscribe<Response>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Response> e) throws Exception {
+                Log.e(TAG, "create 线程:" + Thread.currentThread().getName() + "\n");
                 Builder builder = new Builder()
                         .url("http://api.avatardata.cn/MobilePlace/LookUp?key=ec47b85086be4dc8b5d941f5abd37a4e&mobileNumber=13021671512")
                         .get();
@@ -58,20 +58,20 @@ public class RxNetSingleActivity extends RxOperatorBaseActivity {
                 e.onNext(response);
             }
         }).map(new Function<Response, MobileAddress>() {
-                    @Override
-                    public MobileAddress apply(@NonNull Response response) throws Exception {
+            @Override
+            public MobileAddress apply(@NonNull Response response) throws Exception {
 
-                        Log.e(TAG, "map 线程:" + Thread.currentThread().getName() + "\n");
-                        if (response.isSuccessful()) {
-                            ResponseBody body = response.body();
-                            if (body != null) {
-                                Log.e(TAG, "map:转换前:" + response.body());
-                                return new Gson().fromJson(body.string(), MobileAddress.class);
-                            }
-                        }
-                        return null;
+                Log.e(TAG, "map 线程:" + Thread.currentThread().getName() + "\n");
+                if (response.isSuccessful()) {
+                    ResponseBody body = response.body();
+                    if (body != null) {
+                        Log.e(TAG, "map:转换前:" + response.body());
+                        return new Gson().fromJson(body.string(), MobileAddress.class);
                     }
-                }).observeOn(AndroidSchedulers.mainThread())
+                }
+                return null;
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(new Consumer<MobileAddress>() {
                     @Override
                     public void accept(@NonNull MobileAddress s) throws Exception {

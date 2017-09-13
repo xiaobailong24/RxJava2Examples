@@ -55,15 +55,15 @@ public class RxZipActivity extends RxOperatorBaseActivity {
             @Override
             public void subscribe(@NonNull ObservableEmitter<String> e) throws Exception {
                 if (!e.isDisposed()) {
-                    e.onNext("A");
                     mRxOperatorsText.append("String emit : A \n");
                     Log.e(TAG, "String emit : A \n");
-                    e.onNext("B");
+                    e.onNext("A");
                     mRxOperatorsText.append("String emit : B \n");
                     Log.e(TAG, "String emit : B \n");
-                    e.onNext("C");
+                    e.onNext("B");
                     mRxOperatorsText.append("String emit : C \n");
                     Log.e(TAG, "String emit : C \n");
+                    e.onNext("C");
                 }
             }
         });
@@ -74,21 +74,21 @@ public class RxZipActivity extends RxOperatorBaseActivity {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Integer> e) throws Exception {
                 if (!e.isDisposed()) {
-                    e.onNext(1);
                     mRxOperatorsText.append("Integer emit : 1 \n");
                     Log.e(TAG, "Integer emit : 1 \n");
-                    e.onNext(2);
+                    e.onNext(1);
                     mRxOperatorsText.append("Integer emit : 2 \n");
                     Log.e(TAG, "Integer emit : 2 \n");
-                    e.onNext(3);
+                    e.onNext(2);
                     mRxOperatorsText.append("Integer emit : 3 \n");
                     Log.e(TAG, "Integer emit : 3 \n");
-                    e.onNext(4);
+                    e.onNext(3);
                     mRxOperatorsText.append("Integer emit : 4 \n");
                     Log.e(TAG, "Integer emit : 4 \n");
-                    e.onNext(5);
+                    e.onNext(4);
                     mRxOperatorsText.append("Integer emit : 5 \n");
                     Log.e(TAG, "Integer emit : 5 \n");
+                    e.onNext(5);
                 }
             }
         });

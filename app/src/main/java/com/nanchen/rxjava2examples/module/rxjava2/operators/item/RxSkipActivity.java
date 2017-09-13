@@ -30,6 +30,7 @@ public class RxSkipActivity extends RxOperatorBaseActivity {
     protected void doSomething() {
         Observable.just(1,2,3,4,5)
                 .skip(2)
+                .take(1)
                 .subscribe(new Consumer<Integer>() {
                     @Override
                     public void accept(@NonNull Integer integer) throws Exception {
